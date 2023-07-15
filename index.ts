@@ -1,20 +1,41 @@
 // Import stylesheets
 import './style.css';
 
-let board: Array<string> = ['', '', '', '', '', '', '', '', ''];
+function initiateButtons() {
+  const buttons = document.getElementsByTagName('button');
 
+  for (let button of buttons) {
+    button.addEventListener('click', buttonEventListener);
+    button.setAttribute('class', 'show');
+  }
+}
+
+initiateButtons();
+
+function buttonEventListener() {
+  const buttons = document.getElementsByTagName('button');
+  for (let button of buttons) {
+    button.setAttribute('class', 'no-show');
+  }
+
+  generateBoard();
+}
+
+// render board
 function generateBoard() {
   const board = document.getElementsByClassName('board');
 
   for (let i = 0; i < 9; i++) {
     const element = document.createElement('div');
     element.className = 'cell';
+    element.innerHTML = '';
 
     board[0].appendChild(element);
   }
 }
 
-generateBoard();
+// calculate moves, win and loss
+let board: Array<string> = ['', '', '', '', '', '', '', '', ''];
 
 function matchesWinningCombo(): boolean {
   return (
