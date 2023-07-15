@@ -1,9 +1,22 @@
 // Import stylesheets
 import './style.css';
 
-let board = ['', '', '', '', '', '', '', '', ''];
+let board: Array<string> = ['', '', '', '', '', '', '', '', ''];
 
-function matchesWinningCombo() {
+function generateBoard() {
+  const board = document.getElementsByClassName('board');
+
+  for (let i = 0; i < 9; i++) {
+    const element = document.createElement('div');
+    element.className = 'cell';
+
+    board[0].appendChild(element);
+  }
+}
+
+generateBoard();
+
+function matchesWinningCombo(): boolean {
   return (
     // horizontal combos
     board[0] === board[1] &&
@@ -35,10 +48,18 @@ function matchesWinningCombo() {
   );
 }
 
-function indexComboIsNotEmpty(i1, i2, i3) {
+function indexComboIsNotEmpty(i1: number, i2: number, i3: number): boolean {
   return board[i1] !== '' && board[i2] !== '' && board[i3] !== '';
 }
 
-function isBoardFull() {
+function isBoardFull(): boolean {
   return board.every((item) => item !== '');
+}
+
+function min(a: number, b: number): number {
+  return a <= b ? a : b;
+}
+
+function max(a: number, b: number): number {
+  return a >= b ? a : b;
 }
